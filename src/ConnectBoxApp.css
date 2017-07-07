@@ -1,0 +1,10 @@
+#scroll-to-top {
+    position: fixed;
+    z-index: 2000;
+    right: 30px;
+    top: 1.25em;
+}
+
+a {
+    text-decoration: none !important;
+}

@@ -1,0 +1,13 @@
+.subfolder-icon-container {
+    margin-left: 5px;
+    width: 14px;
+    height: 14px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.subfolder-icon-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}

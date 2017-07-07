@@ -1,0 +1,22 @@
+.home-icon-container {
+    width: 65px;
+    height: 70px;
+}
+
+.home-icon-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.centered {
+    text-align: center;
+}
+
+table.collapsed span.row_name {
+    display: none;
+}
+
+table span.directory {
+    font-weight: bold;
+}

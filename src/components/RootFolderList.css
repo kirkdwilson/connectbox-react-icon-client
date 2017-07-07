@@ -1,0 +1,14 @@
+/* Top-level collapsed table */
+table.collapsed {
+    background-color: #CCEFEB;
+}
+
+table.collapsed > tbody > tr {
+    float: left;
+}
+table.collapsed > tbody td {
+    padding: 10px !important;
+    line-height: normal !important;
+    vertical-align: bottom;
+    border-top: 0 !important;
+}
