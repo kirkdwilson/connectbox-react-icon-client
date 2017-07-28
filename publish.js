@@ -135,12 +135,15 @@ async function main (publishDir) {
   createDirIfNotExists(cssDir)
   const fontsDir = `${root}/fonts`
   createDirIfNotExists(fontsDir)
+  const configDir = `${root}/config`
+  createDirIfNotExists(configDir)
 
   await copyFileAsync(`build/static/css/main.${cssKey}.css`, `${staticCss}/main.css`)
   await copyFileAsync(`build/static/css/main.${cssKey}.css.map`, `${staticCss}/main.css.map`)
   await copyFileAsync(`build/static/js/main.${jsKey}.js`, `${staticJs}/main.js`)
   await copyFileAsync(`build/static/js/main.${jsKey}.js.map`, `${staticJs}/main.js.map`)
 
+  await copyFileAsync('build/config/default.json', `${configDir}/default.json`)
   await copyFileAsync('build/js/fa-icon-metadata.js', `${jsDir}/fa-icon-metadata.js`)
   await copyFileAsync('build/css/bootstrap.min.css', `${cssDir}/bootstrap.min.css`)
   await copyFileAsync('build/css/font-awesome.min.css', `${cssDir}/font-awesome.min.css`)
