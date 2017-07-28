@@ -4,11 +4,15 @@
 
 # Development
 
-```git clone git@github.com:ConnectBox/connectbox-react-icon-client.git
+```
+git clone git@github.com:ConnectBox/connectbox-react-icon-client.git
 cd connectbox-react-icon-client
 npm install
-npm run start```
+npm run start
+```
 
 # Publish
 
-```npm run publish```
+```
+npm run publish
+```
