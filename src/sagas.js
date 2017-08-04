@@ -1,4 +1,4 @@
-import { call, put, takeEvery, select } from 'redux-saga/effects'
+import { call, put, takeLatest, select } from 'redux-saga/effects'
 import {getContent, getConfig, getStats} from './api'
 
 const checkNeedsConfig = (state) => state.needsConfig
@@ -11,6 +11,7 @@ function * fetchContent (action) {
   try {
     yield put({type: 'LOADING_START'})
     const needsConfig = yield select(checkNeedsConfig)
+
     if (needsConfig) {
       try {
         const configPath = yield select(getConfigPath)
@@ -21,7 +22,9 @@ function * fetchContent (action) {
           config: config
         })
       } catch (e) {
-        yield put({type: 'CONFIG_FETCH_FAILED', message: e.message})
+        console.error(e.message)
+        yield put({type: 'CONFIG_FETCH_FAILED', message: 'Unable to load configuration'})
+        return
       }
     }
     const {contentPath} = action.payload
@@ -42,11 +45,13 @@ function * fetchContent (action) {
           stats: stats
         })
       } catch (e) {
-        yield put({type: 'STATS_FETCH_FAILED', message: e.message})
+        console.error(e.message)
+        yield put({type: 'STATS_FETCH_FAILED', message: 'Unable to load popular files'})
       }
     }
   } catch (e) {
-    yield put({type: 'CONTENT_FETCH_FAILED', message: e.message})
+    console.error(e.message)
+    yield put({type: 'CONTENT_FETCH_FAILED', message: 'Unable to load content'})
   }
 }
 
@@ -55,8 +60,7 @@ function * fetchContent (action) {
   Allows concurrent fetches of user.
 */
 function * mySaga () {
-  yield takeEvery('CONTENT_FETCH_REQUESTED', fetchContent)
-  // yield takeEvery('CONFIG_FETCH_REQUESTED', fetchConfig)
+  yield takeLatest('CONTENT_FETCH_REQUESTED', fetchContent)
 }
 
 /*
