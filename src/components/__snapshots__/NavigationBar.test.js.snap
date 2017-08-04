@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render NavigationBar Root - Loading 1`] = `
+<ol
+  className="breadcrumb"
+  style={
+    Object {
+      "left": "20px",
+      "position": "fixed",
+      "right": "20px",
+      "zIndex": 1000,
+    }
+  }
+>
+  <li>
+    <a
+      onClick={[Function]}
+      role="button"
+      title="Reload"
+    >
+      <i
+        className="fa fa-refresh loader"
+      />
+    </a>
+  </li>
+  <li>
+    <span>
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-home fa-lg"
+        />
+      </a>
+    </span>
+  </li>
+  <li>
+    <span>
+      content
+    </span>
+  </li>
+</ol>
+`;
+
+exports[`Render NavigationBar Root 1`] = `
+<ol
+  className="breadcrumb"
+  style={
+    Object {
+      "left": "20px",
+      "position": "fixed",
+      "right": "20px",
+      "zIndex": 1000,
+    }
+  }
+>
+  <li>
+    <a
+      onClick={[Function]}
+      role="button"
+      title="Reload"
+    >
+      <i
+        className="fa fa-refresh"
+      />
+    </a>
+  </li>
+  <li>
+    <span>
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-home fa-lg"
+        />
+      </a>
+    </span>
+  </li>
+  <li>
+    <span>
+      content
+    </span>
+  </li>
+</ol>
+`;
+
+exports[`Render NavigationBar Subfolder 1`] = `
+<ol
+  className="breadcrumb"
+  style={
+    Object {
+      "left": "20px",
+      "position": "fixed",
+      "right": "20px",
+      "zIndex": 1000,
+    }
+  }
+>
+  <li>
+    <a
+      onClick={[Function]}
+      role="button"
+      title="Reload"
+    >
+      <i
+        className="fa fa-refresh"
+      />
+    </a>
+  </li>
+  <li>
+    <span>
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-home fa-lg"
+        />
+      </a>
+    </span>
+  </li>
+  <li>
+    <a
+      href="/#/content"
+      onClick={[Function]}
+    >
+      content
+    </a>
+  </li>
+  <li>
+    <a
+      href="/#/content/foo"
+      onClick={[Function]}
+    >
+      foo
+    </a>
+  </li>
+  <li>
+    <span>
+      bar
+    </span>
+  </li>
+</ol>
+`;

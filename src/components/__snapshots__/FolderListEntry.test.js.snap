@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render FolderListEntry 1`] = `
+<tr>
+  <td>
+    <a
+      href="/contentfoo/Test File"
+    >
+      <i
+        className="fa "
+      />
+      <i
+        className="fa fa-file-text-o"
+      />
+      <span
+        className=""
+      >
+        <span>
+           
+          Test File
+        </span>
+      </span>
+    </a>
+  </td>
+</tr>
+`;

@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render PopularFileListEntry with hidden top border 1`] = `
+<tr>
+  <td
+    style={
+      Object {
+        "borderTop": 0,
+      }
+    }
+  >
+    <a
+      href={undefined}
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="fa fa-file-text-o"
+      />
+      <span>
+         
+        Test File
+      </span>
+    </a>
+    <span
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+       
+    </span>
+  </td>
+</tr>
+`;
+
+exports[`Render PopularFileListEntry without hidden top border 1`] = `
+<tr>
+  <td
+    style={Object {}}
+  >
+    <a
+      href={undefined}
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+      <i
+        className="fa fa-file-text-o"
+      />
+      <span>
+         
+        Test File
+      </span>
+    </a>
+    <span
+      style={
+        Object {
+          "display": "inline-block",
+        }
+      }
+    >
+       
+    </span>
+  </td>
+</tr>
+`;

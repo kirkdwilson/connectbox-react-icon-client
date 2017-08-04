@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render FolderList 1`] = `
+<div
+  className="table-responsive"
+>
+  <table
+    className="table"
+  >
+    <tbody>
+      <tr>
+        <td>
+          <a
+            href="/contentfoo/Test File"
+          >
+            <i
+              className="fa "
+            />
+            <i
+              className="fa fa-file-text-o"
+            />
+            <span
+              className=""
+            >
+              <span>
+                 
+                Test File
+              </span>
+            </span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

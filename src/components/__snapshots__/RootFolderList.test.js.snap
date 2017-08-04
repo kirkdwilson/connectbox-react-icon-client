@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Render RootFolderList with folder name 1`] = `
+<div
+  className="table-responsive"
+>
+  <table
+    className="table collapsed"
+  >
+    <tbody>
+      <tr>
+        <td
+          className="centered"
+        >
+          <a
+            href="#/Test File"
+            onClick={[Function]}
+          >
+            <i
+              className="fa "
+            />
+            <span>
+              <br />
+              Test File
+            </span>
+            <span
+              className="directory"
+            />
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`Render RootFolderList without folder name 1`] = `
+<div
+  className="table-responsive"
+>
+  <table
+    className="table collapsed"
+  >
+    <tbody>
+      <tr>
+        <td
+          className="centered"
+        >
+          <a
+            href="#/Test File"
+            onClick={[Function]}
+          >
+            <i
+              className="fa "
+            />
+            <span
+              className="directory row_name"
+            />
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
