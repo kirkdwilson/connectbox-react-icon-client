@@ -50,7 +50,6 @@ const postProcessContent = (content, contentPath, state) => {
   content.map((f) => {
     f.isTopLevel = isTopLevel
     f.mtime = new Date(f.mtime)
-    // f.icon_file = null
     if (f.type === 'file') {
       f.ext = fileExtension(f.name)
       if (f.isTopLevel) {
