@@ -22,7 +22,7 @@ const mapDispatchToProps = {
   getContent, setConfigPath
 }
 
-class ConnectBoxApp extends Component {
+export class ConnectBoxApp extends Component {
     static propTypes = {
         config: PropTypes.object.isRequired,
         content: PropTypes.array.isRequired,
