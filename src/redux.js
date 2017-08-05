@@ -10,7 +10,7 @@ export function setConfigPath (configPath, callback) {
   return { type: 'SET_CONFIG_PATH', payload: {configPath: path} }
 }
 
-const initialState = {
+export const initialState = {
   error: undefined,
   contentPath: '',
   content: undefined
