@@ -1,3 +1,4 @@
+/* global describe, it, expect, afterEach, beforeEach */
 import axios from 'axios'
 import SagaTester from 'redux-saga-tester'
 import saga from './sagas'
@@ -45,7 +46,7 @@ describe('Sagas with config already loaded', () => {
     mock.reset()
   })
 
-  test('Fetches content from root', async () => {
+  it('Fetches content from root', async () => {
     const mockTS = 'Thu, 29 Jun 2017 02:23:21 GMT'
     const expected = {isTopLevel: true, mtime: new Date(mockTS), name: 'Help', type: 'directory'}
     const mockRootResponse = [{ 'name': 'Help', 'type': 'directory', 'mtime': mockTS }]
@@ -67,7 +68,7 @@ describe('Sagas with config already loaded', () => {
     expect(state.popularFiles[0]).toEqual(expectedPopularFiles)
   })
 
-  test('Fetches content from root and stats config fails', async () => {
+  it('Fetches content from root and stats config fails', async () => {
     const mockTS = 'Thu, 29 Jun 2017 02:23:21 GMT'
     const expected = {isTopLevel: true, mtime: new Date(mockTS), name: 'Help', type: 'directory'}
     const mockRootResponse = [{ 'name': 'Help', 'type': 'directory', 'mtime': mockTS }]
@@ -86,7 +87,7 @@ describe('Sagas with config already loaded', () => {
     expect(state.popularFiles.length).toEqual(0)
   })
 
-  test('Fetches content from a subfolder', async () => {
+  it('Fetches content from a subfolder', async () => {
     const mockTS = 'Thu, 29 Jun 2017 02:23:21 GMT'
     const expected = {isTopLevel: false, mtime: new Date(mockTS), name: 'Help', type: 'directory'}
     const mockResponse = [{ 'name': 'Help', 'type': 'directory', 'mtime': mockTS }]
@@ -101,7 +102,7 @@ describe('Sagas with config already loaded', () => {
     expect(state.content[0]).toEqual(expected)
   })
 
-  test('Fetches content from a subfolder and receives 500', async () => {
+  it('Fetches content from a subfolder and receives 500', async () => {
     mock.onGet('/content/foo/').reply(500)
 
     sagaTester.dispatch({ type: 'CONTENT_FETCH_REQUESTED', payload: { contentPath: 'foo' } })
@@ -140,7 +141,7 @@ describe('Sagas with config not loaded', () => {
     mock.reset()
   })
 
-  test('Fetches content from a subfolder', async () => {
+  it('Fetches content from a subfolder', async () => {
     expect(sagaTester.getState().config).toEqual({})
     const mockTS = 'Thu, 29 Jun 2017 02:23:21 GMT'
     const expected = {isTopLevel: false, mtime: new Date(mockTS), name: 'Help', type: 'directory'}
@@ -159,7 +160,7 @@ describe('Sagas with config not loaded', () => {
     expect(state.config).toEqual(config)
   })
 
-  test('Fetches content from a subfolder with a config fail', async () => {
+  it('Fetches content from a subfolder with a config fail', async () => {
     expect(sagaTester.getState().config).toEqual({})
     const mockTS = 'Thu, 29 Jun 2017 02:23:21 GMT'
     const mockResponse = [{ 'name': 'Help', 'type': 'directory', 'mtime': mockTS }]

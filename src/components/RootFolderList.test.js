@@ -1,11 +1,12 @@
+/* global it, expect, */
 import React from 'react'
 import RootFolderList from './RootFolderList'
 import renderer from 'react-test-renderer'
 
 import { MemoryRouter as Router } from 'react-router-dom'
 
-test('Render RootFolderList with folder name', () => {
-  const iconMetadata = { ids: [], names: {}}
+it('Render RootFolderList with folder name', () => {
+  const iconMetadata = {ids: [], names: {}}
   const content = [{type: 'file', ext: 'doc', name: 'Test File'}]
   const component = renderer.create(
     <Router>
@@ -21,8 +22,8 @@ test('Render RootFolderList with folder name', () => {
   expect(tree).toMatchSnapshot()
 })
 
-test('Render RootFolderList without folder name', () => {
-  const iconMetadata = { ids: [], names: {}}
+it('Render RootFolderList without folder name', () => {
+  const iconMetadata = {ids: [], names: {}}
   const content = [{type: 'file', ext: 'doc', name: 'Test File'}]
   const component = renderer.create(
     <Router>

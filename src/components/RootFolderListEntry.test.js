@@ -1,10 +1,11 @@
+/* global it, expect, */
 import React from 'react'
 import RootFolderListEntry from './RootFolderListEntry'
 import renderer from 'react-test-renderer'
 import { MemoryRouter as Router } from 'react-router-dom'
 
-test('Render RootFolderListEntry', () => {
-  const iconMetadata = { ids: [], names: {}}
+it('Render RootFolderListEntry', () => {
+  const iconMetadata = {ids: [], names: {}}
   const file = {type: 'file', ext: 'doc', name: 'Test File'}
   const component = renderer.create(
     <Router>

@@ -1,9 +1,10 @@
+/* global it, expect, */
 import React from 'react'
 import NavigationBar from './NavigationBar'
 import renderer from 'react-test-renderer'
 import { MemoryRouter as Router } from 'react-router-dom'
 
-test('Render NavigationBar Root', () => {
+it('Render NavigationBar Root', () => {
   const component = renderer.create(
     <Router>
       <NavigationBar
@@ -16,7 +17,7 @@ test('Render NavigationBar Root', () => {
   expect(tree).toMatchSnapshot()
 })
 
-test('Render NavigationBar Subfolder', () => {
+it('Render NavigationBar Subfolder', () => {
   const component = renderer.create(
     <Router>
       <NavigationBar
@@ -29,7 +30,7 @@ test('Render NavigationBar Subfolder', () => {
   expect(tree).toMatchSnapshot()
 })
 
-test('Render NavigationBar Root - Loading', () => {
+it('Render NavigationBar Root - Loading', () => {
   const component = renderer.create(
     <Router>
       <NavigationBar

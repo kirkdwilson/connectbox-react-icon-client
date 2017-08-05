@@ -1,9 +1,10 @@
+/* global it, expect, */
 import React from 'react'
 import FolderList from './FolderList'
 import renderer from 'react-test-renderer'
 
-test('Render FolderList', () => {
-  const iconMetadata = { ids: [], names: {}}
+it('Render FolderList', () => {
+  const iconMetadata = {ids: [], names: {}}
   const content = [{type: 'file', ext: 'doc', name: 'Test File'}]
   const component = renderer.create(
     <FolderList

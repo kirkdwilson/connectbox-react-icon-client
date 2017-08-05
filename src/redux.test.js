@@ -1,3 +1,4 @@
+/* global describe, it, expect */
 import reducer, { getContent, setConfigPath, initialState } from './redux'
 
 const config = {
