@@ -8,7 +8,12 @@ const config = {
     tail_slash: true,
     display_root_folder_names: true,
     icon_prefix: '_icon_',
-    stats_file: 'stats.top10.json'
+    stats_file: 'stats.top10.json',
+    excluded_files: [
+      'autorun.inf',
+      '.ds_store',
+      'system volume information'
+    ]
   }
 }
 
@@ -69,6 +74,35 @@ describe('reducers', () => {
     const mockRootResponse = [
         { 'name': 'Help', 'type': 'directory', 'mtime': mockDate },
         { 'name': 'King James Bible.epub', 'type': 'file', 'mtime': 'Thu, 29 Jun 2017 02:23:21 GMT', 'size': 1457717 }
+    ]
+    const expectedContent = [ { name: 'Help',
+      type: 'directory',
+      mtime: new Date(mockDate),
+      isTopLevel: true } ]
+    const expectedTopLevelFiles = [ { name: 'King James Bible.epub',
+      type: 'file',
+      mtime: new Date(mockDate),
+      size: 1457717,
+      isTopLevel: false,
+      ext: 'epub' } ]
+    let state = reducer({config}, {type: 'CONTENT_FETCH_SUCCEEDED', content: mockRootResponse, contentPath})
+    expect(state.content).toEqual(expectedContent)
+    expect(state.topLevelFiles).toEqual(expectedTopLevelFiles)
+    expect(state.contentPath).toEqual(contentPath)
+  })
+
+  it('successfully filters content', () => {
+    const contentPath = '/'
+    const mockDate = 'Thu, 29 Jun 2017 02:23:21 GMT'
+    const mockRootResponse = [
+        { 'name': 'Help', 'type': 'directory', 'mtime': mockDate },
+        { 'name': 'King James Bible.epub', 'type': 'file', 'mtime': 'Thu, 29 Jun 2017 02:23:21 GMT', 'size': 1457717 },
+        { name: 'AUTORUN.INF*', type: 'file', mtime: mockDate },
+        { name: 'AUTORUN.INF', type: 'file', mtime: mockDate },
+        { name: 'Autorun.inf', type: 'file', mtime: mockDate },
+        { name: '.DS_Store', type: 'file', mtime: mockDate },
+        { name: 'System Volume Information', type: 'file', mtime: mockDate },
+        { name: '.hidden_file', type: 'file', mtime: mockDate }
     ]
     const expectedContent = [ { name: 'Help',
       type: 'directory',

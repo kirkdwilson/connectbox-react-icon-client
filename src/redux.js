@@ -62,8 +62,18 @@ const postProcessContent = (content, contentPath, state) => {
     return f
   })
 
-  // Remove icon files
+  const excludeFilters = config.Client.excluded_files ? config.Client.excluded_files.map((pattern) => {
+    return RegExp(pattern, 'i')
+  }) : []
+
+  excludeFilters.push(/^\..*/)
+  // Remove excluded files
   let files = content.filter((f) => {
+    const excluded = excludeFilters.reduce((a, b) => a || RegExp(b).test(f.name), false)
+    if (excluded) {
+      return false
+    }
+
     if (f.name.startsWith(config.Client.icon_prefix)) {
       parseIcoMetadata(config.Client.icon_prefix, f.name, dirMap)
       return false
