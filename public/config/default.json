@@ -10,7 +10,8 @@
     "excluded_files": [
         "autorun.inf",
         ".ds_store",
-        "system volume information"
+        "system volume information",
+        "Thumbs.db"
     ]
   }
 }
