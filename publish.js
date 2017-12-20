@@ -138,9 +138,9 @@ async function main (publishDir) {
   const configDir = `${root}/config`
   createDirIfNotExists(configDir)
 
-  await copyFileAsync(`build/static/css/main.${cssKey}.css`, `${staticCss}/main.css`)
+  await writeFileAsync(`${staticCss}/main.css`, (await readFileAsync(`build/static/css/main.${cssKey}.css`)).toString().replace(new RegExp(`.${cssKey}`, 'g'), ''))
   await copyFileAsync(`build/static/css/main.${cssKey}.css.map`, `${staticCss}/main.css.map`)
-  await copyFileAsync(`build/static/js/main.${jsKey}.js`, `${staticJs}/main.js`)
+  await writeFileAsync(`${staticJs}/main.js`, (await readFileAsync(`build/static/js/main.${jsKey}.js`)).toString().replace(new RegExp(`.${jsKey}`, 'g'), ''))
   await copyFileAsync(`build/static/js/main.${jsKey}.js.map`, `${staticJs}/main.js.map`)
 
   await copyFileAsync('build/config/default.json', `${configDir}/default.json`)
