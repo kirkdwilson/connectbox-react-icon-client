@@ -14,23 +14,19 @@ class FolderList extends Component {
   //handles case 2 & 4 for top level and sub folder lists
   render () {
     const { content, contentRoot, folderPath, iconMetadata } = this.props
-    let menuItems = []
-    for (let i = 0; i < content.length; i++) {
-      menuItems.push(
-        <FolderListEntry
-            contentRoot={contentRoot}
-            key={`folderEntry${i}`}
-            file={content[i]}
-            folderPath={folderPath}
-            iconMetadata={iconMetadata}
-        />)
-    }
 
     return (
       <div className="table-responsive">
           <table className="table">
               <tbody>
-                  {menuItems}
+                  {content.map((entry, i) =>
+                    <FolderListEntry
+                      contentRoot={contentRoot}
+                      key={`folderEntry${i}`}
+                      file={entry}
+                      folderPath={folderPath}
+                      iconMetadata={iconMetadata}
+                  />)}
               </tbody>
           </table>
       </div>

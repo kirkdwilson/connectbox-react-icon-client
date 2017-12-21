@@ -20,12 +20,7 @@ const devTools =
 const sagaMiddleware = createSagaMiddleware()
 
 let initialState = {
-  content: [],
-  error: undefined,
-  // DEFAULT CONFIG PATH
-  configPath: '/config/default.json',
-  contentPath: '',
-  iconMetadata: window.iconMetadata,
+  chatPanelShowing: false,
   // DEFAULT CONFIG
   config: {
     'Content': {
@@ -39,9 +34,21 @@ let initialState = {
       'stats_file': 'stats.top10.json'
     }
   },
+  content: [],
+  // DEFAULT CONFIG PATH
+  configPath: '/config/default.json',
+  contentPath: '',
+  error: undefined,
+  iconMetadata: window.iconMetadata,
+  mention: false,
+  messages: {},
   needsConfig: true,
+  newMessages: false,
+  nick: null,
   loading: false,
-  popularFiles: null
+  popularFiles: null,
+  sentMessages: [],
+  textDirection: 'ltr'
 }
 let store = createStore(reducer, initialState, compose(applyMiddleware(sagaMiddleware), devTools()))
 

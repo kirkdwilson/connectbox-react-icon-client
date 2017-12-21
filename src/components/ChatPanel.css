@@ -1,0 +1,154 @@
+/* Top-level collapsed table */
+/* popup positioned absolutely */
+@media only screen and (max-width: 768px) {
+  .chat-window {
+      background-color: #CCEFEB;
+      border-radius: 4px;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+      overflow: hidden;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .chat-window {
+      background-color: #CCEFEB;
+      border-radius: 4px;
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      right: 20px;
+      bottom: 10px;
+      overflow: hidden;
+  }
+}
+
+
+.close-button {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  padding: 2px;
+  margin-right: 15px;
+  margin-top: 0px;
+  cursor: pointer;
+}
+
+.content {
+  height: calc(100%);
+  display: flex;
+  flex-direction: column;
+  padding: 16px 4px 4px 4px;
+}
+
+.messages-panel {
+  border-radius: 4px;
+  height: calc(100%);
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin: 10px;
+  background-color: #FFFFFF;
+}
+
+.message-panel-bottom {
+  width: calc(100%);
+  margin: 15px;
+}
+
+div.sent-message {
+    margin-left:auto;
+    margin-right:5px;
+    width: auto;
+    padding: 2px;
+}
+
+div.message {
+    width: auto;
+    margin: 0px;
+    padding: 2px;
+    width: 98%;
+}
+
+div.message-body {
+    background: #DDEEDD;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 4px;
+    width: auto;
+    display: inline-block;
+}
+
+div.sent-message-body {
+    background: #DDDDDD;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 4px;
+    width: auto;
+    display: inline-block;
+}
+
+div.message-nick {
+    margin-left: 15px;
+    font-size: smaller;
+}
+
+div.sent-message-nick {
+    margin-right: 15px;
+    font-size: smaller;  
+    text-align: right;
+}
+
+div.spacer {
+  flex-grow: 1;
+}
+
+.input-panel {
+    width: calc(100%);
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.input-nick {
+    width: 125px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.view-nick {
+    width: 125px;
+    margin-left: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+    background-color: #FCFCFC;
+    text-align: center;
+    border-radius: 4px;
+    padding-top: 2px;
+}
+
+.input-message {
+    flex-grow: 1;
+}
+
+.button-text-direction {
+  margin-top: 2px;
+  margin-right: 4px;
+  cursor: pointer;
+}
+
+.horizontal-flip {
+  transform: scaleX(-1);
+}
+
+.button-send {
+    width: 60px;
+    margin-left: 5px;
+    cursor: pointer;
+    text-align: center;
+    padding-right: 10px;
+}
