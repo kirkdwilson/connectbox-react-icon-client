@@ -21,6 +21,7 @@ import NavigationBar from './components/NavigationBar'
 import PopularFileList from './components/PopularFileList'
 import RootFolderList from './components/RootFolderList'
 import FolderList from './components/FolderList'
+import Footer from './components/Footer'
 
 function mapStateToProps (state) {
   const {
@@ -185,15 +186,15 @@ export class ConnectBoxApp extends Component {
       return (
         <div className='chat-button' onClick={this.onChatClick}>
           <i
-            style={{position: 'absolute', top: 0, right: 0, display: !mention && newMessages ? 'block' : 'none'}}
+            style={{position: 'absolute', top: 0, right: 10, display: !mention && newMessages ? 'block' : 'none'}}
             className={`fa fa-comments-o fa-lg chat-icon ${newMessageOnClass} ${chatOfflineClass}`}
             aria-hidden='true'></i>
           <i
-            style={{position: 'absolute', top: 0, right: 0, display: !mention && newMessages ? 'block' : 'none'}}
+            style={{position: 'absolute', top: 0, right: 10, display: !mention && newMessages ? 'block' : 'none'}}
             className={`fa fa-comments fa-lg chat-icon ${newMessageOffClass} ${chatOfflineClass}`}
             aria-hidden='true'></i>
           <i
-            style={{position: 'absolute', top: 0, right: 0, display: !newMessages ? 'block' : 'none'}}
+            style={{position: 'absolute', top: 0, right: 10, display: !newMessages ? 'block' : 'none'}}
             className={`fa fa-comments fa-lg chat-icon ${mentionClass} ${chatOfflineClass}`}
             aria-hidden='true'></i>
         </div>
@@ -207,68 +208,71 @@ export class ConnectBoxApp extends Component {
       const isRoot = contentPath === '' || contentPath === '/'
 
       return (
-        <div style={{margin: '0px', padding: '0px'}}>
+        <div style={{height: 'calc(100%)'}}>
           {this.banner()}
-          <div className="container-fluid">
+          <div className="content-panel">
             {showScrollToTop &&
               <div className="pull-right" id="scroll-to-top">
               <a role="button" onClick={this.scrollToTop}><i className="fa fa-long-arrow-up"></i> to top</a></div>
             }
 
-          <div className="navigation-bar">
-              <NavigationBar
-                contentPath={contentPath}
-                reload={this.reload}
-                loading={loading}/>
-              {this.renderChatButton()}
-          </div>
+            <div className="navigation-bar">
+                <NavigationBar
+                  contentPath={contentPath}
+                  reload={this.reload}
+                  loading={loading}/>
+                {this.renderChatButton()}
+            </div>
 
-            {!error && isRoot &&
-              <div className="row" style={{marginTop: "3em"}}>
-                <RootFolderList
-                  iconMetadata={iconMetadata}
-                  contentRoot={config.Content.contentRoute}
-                  displayFolderName={config.Client.display_root_folder_names}
-                  content={content}
-                  />
-              </div>
-            }
 
-            {!error && !isRoot &&
-              <div className="row" style={{marginTop: "3em"}}>
-                  <FolderList
+              {!error && isRoot &&
+                <div style={{marginTop: "3em"}}>
+                  <RootFolderList
                     iconMetadata={iconMetadata}
-                    folderPath={contentPath}
                     contentRoot={config.Content.contentRoute}
-                    content={content}/>
-              </div>
-            }
-
-            {!error && isRoot && topLevelFiles &&
-              <div className="row">
-                  <FolderList
-                    iconMetadata={iconMetadata}
-                    folderPath=''
-                    contentRoot={config.Content.contentRoute}
-                    content={topLevelFiles}/>
-              </div>
-            }
-
-            {!error && popularFiles && popularFiles.length > 0 && isRoot &&
-                <div className="row">
-                    <PopularFileList popularFiles={popularFiles}/>
+                    displayFolderName={config.Client.display_root_folder_names}
+                    content={content}
+                    />
                 </div>
-            }
+              }
 
-            {error &&
-              <div className="row" style={{marginTop: '60px'}}>
-                    <div className="alert alert-danger" role="alert">
-                        <big>
-                            Error occurred: "{ error || 'Unexpected error' }"
-                        </big>
-                    </div>
+              {!error && !isRoot &&
+                <div style={{marginTop: "3em"}}>
+                    <FolderList
+                      iconMetadata={iconMetadata}
+                      folderPath={contentPath}
+                      contentRoot={config.Content.contentRoute}
+                      content={content}/>
                 </div>
-            }
+              }
+
+              {!error && isRoot && topLevelFiles &&
+                <div>
+                    <FolderList
+                      iconMetadata={iconMetadata}
+                      folderPath=''
+                      contentRoot={config.Content.contentRoute}
+                      content={topLevelFiles}/>
+                </div>
+              }
+
+              {!error && popularFiles && popularFiles.length > 0 && isRoot &&
+                  <div>
+                      <PopularFileList popularFiles={popularFiles}/>
+                  </div>
+              }
+
+              {error &&
+                <div style={{marginTop: '60px'}}>
+                      <div className="alert alert-danger" role="alert">
+                          <big>
+                              Error occurred: "{ error || 'Unexpected error' }"
+                          </big>
+                      </div>
+                  </div>
+              }
+            <div className='spacer' />
+            <Footer />
           </div>
         </div>
       )

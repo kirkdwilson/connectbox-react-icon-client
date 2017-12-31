@@ -12,7 +12,7 @@ class PopularFileListEntry extends Component {
     const { hideTopBorder, file } = this.props
     const popIndicatorElements = []
     for (let j = 0; j < file.score; j++) {
-        popIndicatorElements.push(<span key={`score${j}`}><i className="fa fa-stop"></i></span>)
+        popIndicatorElements.push(<span key={`score${j}`}><i className="fa fa-flash" style={{paddingRight: '2px', color: '#337ab7'}}></i></span>)
     }
 
     return (
@@ -22,7 +22,7 @@ class PopularFileListEntry extends Component {
                     <i className={`fa ${mediaTypes(file)}`}></i>
                     <span>&nbsp;{file.name}</span>
                 </a>
-                <span style={{display: "inline-block"}}>&nbsp;{popIndicatorElements}</span>
+                <span style={{display: "inline-block", paddingLeft: '4px'}}>&nbsp;{popIndicatorElements}</span>
             </td>
         </tr>
     )

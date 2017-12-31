@@ -51,7 +51,7 @@ class NavigationBar extends Component {
     }
 
     return (
-      <ol className='breadcrumb' style={{left: '20px', right: '20px', position: 'fixed', zIndex: 1000}}>
+      <ol className='breadcrumb' style={{left: '0px', right: '0px', position: 'absolute', zIndex: 1000}}>
         <li>
           <a role='button' onClick={this.props.reload} title='Reload'>
             <i className={`fa fa-refresh${this.props.loading ? ' loader' : ''}`} />

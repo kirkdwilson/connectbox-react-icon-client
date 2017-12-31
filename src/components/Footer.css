@@ -1,0 +1,9 @@
+.footer {
+    backgroundColor: #CCEFEB;
+    margin-bottom: 0px;
+}
+
+.settings-button {
+    cursor: pointer;
+    color: #337ab7;
+}

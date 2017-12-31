@@ -1,11 +1,22 @@
 .navigation-bar {
 }
 
+.content-panel {
+  height: calc(100%);
+  display: flex;
+  flex-direction: column;
+}
+
+div.spacer {
+  flex-grow: 1;
+}
+
 .chat-button {
     position: relative;
     float: right;
     z-index: 1200;
     cursor: pointer;
+    color: #337ab7;
 }
 
 .chat-icon {

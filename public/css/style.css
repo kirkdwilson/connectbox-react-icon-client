@@ -1,0 +1,20 @@
+/* popup positioned absolutely */
+@media only screen and (max-width: 768px) {
+  .root {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      right: 0px;
+      bottom: 0px;
+  }
+}
+
+@media only screen and (min-width: 769px) {
+  .root {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      right: 20px;
+      bottom: 10px;
+  }
+}
