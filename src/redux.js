@@ -216,6 +216,7 @@ const handlers = {
     }, false)) : false
     return {
       ...state,
+      chatOffline: false,
       maxMessageId: messages.length > 0 ? messages.reduce((max, message) =>
         message.id > max ? message.id : max, 0) : state.maxMessageId,
       messages: Object.assign({}, state.messages, messages.reduce((map, message) => {
@@ -229,7 +230,7 @@ const handlers = {
   },
 
   'MESSAGES_FETCH_FAILED': (state, action) => {
-    return { ...state, error: action.message, loadingMessages: false }
+    return { ...state, chatOffline: true, loadingMessages: false }
   },
 
   'MESSAGE_SEND_SUCCEEDED': (state, action) => {

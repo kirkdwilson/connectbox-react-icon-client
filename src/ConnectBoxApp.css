@@ -12,6 +12,11 @@
     padding-top: 11px;
 }
 
+.chat-offline {
+    color: grey;
+    cursor: auto;
+}
+
 #scroll-to-top {
     position: fixed;
     z-index: 2000;
