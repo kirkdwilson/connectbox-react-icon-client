@@ -1,6 +1,9 @@
 .footer {
     backgroundColor: #CCEFEB;
     margin-bottom: 0px;
+    width: calc(100%);
+    display: flex;
+    flex-direction: row;
 }
 
 .settings-button {

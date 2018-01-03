@@ -11,6 +11,7 @@ class Footer extends Component {
     return (
       <div
         className='footer breadcrumb'>
+        <div className='spacer' />
         <div className='settings-button' onClick={this.onSettingsClick}>
           <i className={`fa fa-cog fa-lg`} aria-hidden='true'></i>
         </div>

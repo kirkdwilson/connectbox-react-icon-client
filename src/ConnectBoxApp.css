@@ -7,10 +7,6 @@
   flex-direction: column;
 }
 
-div.spacer {
-  flex-grow: 1;
-}
-
 .chat-button {
     position: relative;
     float: right;
