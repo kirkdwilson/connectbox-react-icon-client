@@ -225,7 +225,7 @@ const handlers = {
       }, {})),
       mention,
       loadingMessages: false,
-      newMessages: !mention && state.maxMessageId && (state.newMessages || (messages && messages.length > 0))
+      newMessages: !mention && state.maxMessageId !== undefined && (state.newMessages || (messages && messages.length > 0))
     }
   },
 
