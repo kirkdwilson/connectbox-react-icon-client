@@ -74,7 +74,7 @@ const parseIcoMetadata = (prefix, filename, dirMap) => {
 
     if (dirMap[dirName]) {
       let dir = dirMap[dirName]
-      dir.icon_class = ico
+      dir.icon_class = ico.startsWith('fa-') ? ico : `fa-${ico}`
     }
   }
 }

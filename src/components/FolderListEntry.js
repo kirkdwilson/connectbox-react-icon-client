@@ -2,7 +2,7 @@ import './FolderListEntry.css'
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import {  topLevelCategory, mediaTypes } from '../utils'
+import {  subLevelCategory, mediaTypes } from '../utils'
 
 class FolderListEntry extends Component {
     static propTypes = {
@@ -35,13 +35,12 @@ class FolderListEntry extends Component {
           </tr>
       )
     }
-
+    const iconClass = file.type === 'directory' ? subLevelCategory(file, iconMetadata) : mediaTypes(file)
     return (
       <tr>
         <td>
           <a href={fileLink}>
-            <i className={ `fa ${topLevelCategory(file, iconMetadata)}` }></i>
-            <i className={`fa ${mediaTypes(file)}`}></i>
+            <i className={ `fa ${iconClass}` }></i>
             <span className={spanClass}>
                 <span>&nbsp;{name}</span>
             </span>
