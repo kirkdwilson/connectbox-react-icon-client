@@ -1,0 +1,132 @@
+
+.admin-input {
+  width: 250px !important;
+  margin: 5px;
+}
+
+.admin-component {
+  padding: 10px;
+}
+
+.required {
+  border-color: red;
+}
+
+.dashboard {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.updating {
+  cursor: progress;
+}
+
+.spacer {
+    flex-grow: 1;
+}
+
+.dashboardHeader {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-image: linear-gradient(to bottom, #fff 0, #ccefeb 100%);
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #DDD;
+    flex-flow: row wrap;
+}
+
+.dashboardFooter {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-image: linear-gradient(to bottom, #fff 0, #ccefeb 100%);
+    border-radius: 4px;
+    padding: 10px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #DDD;
+}
+
+.headerTitle {
+    font-weight: normal;
+}
+
+.headerText {
+    position: relative;
+    vertical-align: middle;
+    padding: 10px;
+}
+
+.footerText {
+    position: relative;
+    vertical-align: middle;
+}
+
+.dashboardBody {
+    padding: 20px;
+    font-size: large;
+}
+
+.menuItem {
+}
+
+.selected {
+  background-image: linear-gradient(to top, #eee 0, #bbb 100%);
+  border-style: solid;
+  border-width: 0px 1px 0px 1px;
+  border-color: #DDD;
+}
+
+.waiting-modal {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  z-index: 100;
+}
+
+@media (min-width: 768px) {
+  .homeTitle {
+    font-weight: bold;
+    font-size: 3em;
+  }
+}
+
+@media (max-width: 767px) {
+  .homeTitle {
+    font-weight: bold;
+    font-size: 2em;
+  }
+}
+
+@media (min-width: 768px) {
+  .homeBody {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 767px) {
+  .homeBody {
+    font-size: 16px;
+  }
+}
+
+.loader {
+    border: 6px solid rgb(50,50,50,.8);
+    border-top: 6px rgb(50,50,50,.35);
+    border-radius: 45%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

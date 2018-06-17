@@ -3,7 +3,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ConnectBoxApp from './ConnectBoxApp'
-import registerServiceWorker from './registerServiceWorker'
 import { Provider } from 'react-redux'
 
 import { createStore, applyMiddleware, compose } from 'redux'
@@ -18,8 +17,9 @@ const devTools =
   (() => noop => noop)
 
 const sagaMiddleware = createSagaMiddleware()
-
 let initialState = {
+  authorization: null,
+  authenticateFailed: null,
   chatPanelShowing: false,
   // DEFAULT CONFIG
   config: {
@@ -36,7 +36,7 @@ let initialState = {
   },
   content: [],
   // DEFAULT CONFIG PATH
-  configPath: '/config/default.json',
+  configPath: `${process.env.PUBLIC_URL}/config/default.json`,
   contentPath: '',
   error: undefined,
   iconMetadata: window.iconMetadata,
@@ -48,7 +48,17 @@ let initialState = {
   loading: false,
   popularFiles: null,
   sentMessages: [],
-  textDirection: 'ltr'
+  textDirection: 'ltr',
+  propertyUpdating: false,
+  propertyTimeoutWait: false,
+  latestPropUpdate: '',
+  prop_ssid: '',
+  prop_channel: '1',
+  prop_ui_config: null,
+  prop_hostname: '',
+  prop_staticsite: 'false',
+  passwordUpdated: false,
+  version: 'unknown'
 }
 let store = createStore(reducer, initialState, compose(applyMiddleware(sagaMiddleware), devTools()))
 
@@ -61,4 +71,3 @@ ReactDOM.render(
     </BrowserRouter>
   </Provider>
     , document.getElementById('root'))
-registerServiceWorker()

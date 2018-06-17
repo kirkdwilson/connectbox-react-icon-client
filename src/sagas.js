@@ -1,7 +1,10 @@
+import { get } from 'lodash'
 import { generateNick } from './utils'
+import { delay } from 'redux-saga'
 import {
   call,
   put,
+  takeEvery,
   takeLatest,
   select } from 'redux-saga/effects'
 import {
@@ -10,6 +13,9 @@ import {
   getMessages,
   getStats,
   getDefaultTextDirection,
+  getProperty,
+  setProperty,
+  triggerEvent,
   postMessage } from './api'
 
 const checkNeedsConfig = (state) => state.needsConfig
@@ -17,6 +23,134 @@ const getConfigPath = (state) => state.configPath
 const getConfigFromStore = (state) => state.config
 const getPopularFiles = (state) => state.popularFiles
 const getMaxMessageId = (state) => state.maxMessageId
+const getAuthorization = (state) => state.authorization
+
+function * performAuthenticate (action) {
+  yield put({type: 'AUTHENTICATE_START'})
+  try {
+    const { password } = action.payload
+    const encoded = new Buffer(`admin:${password}`).toString('base64')
+    const authorization = `Basic ${encoded}`
+    const res = yield call(getProperty, {propertyName: 'ui-config', authorization})
+    const version = get(res, 'headers.x-connectbox-version', 'unknown')
+    const { code } = res.data
+    if (code === 0) {
+      yield put({
+        type: 'AUTHENTICATE_SUCCEEDED',
+        authorization,
+        version
+      })
+    } else {
+      yield put({
+        type: 'AUTHENTICATE_FAILED',
+        version
+      })
+    }
+  } catch (err) {
+    console.error(err)
+    yield put({
+      type: 'AUTHENTICATE_FAILED',
+      version: 'unknown'
+    })
+  }
+}
+
+function * performSetProperty (action) {
+  yield put({type: 'SET_PROPERTY_START'})
+  const start = (new Date()).getTime()
+  const {propertyName, propertyValue, requestTimeout, maxWait, wrap} = action.payload
+  let res
+  const authorization = yield select(getAuthorization)
+  try {
+    res = yield call(setProperty, {authorization, propertyName, propertyValue, wrap, timeout: requestTimeout})
+    const code = get(res, 'data.code')
+    if (code === 0) {
+      yield put({
+        type: 'SET_PROPERTY_SUCCEEDED',
+        name: propertyName,
+        value: propertyValue
+      })
+    } else {
+      yield put({type: 'SET_PROPERTY_FAILED', message: `Failed to set property ${propertyName} code: ${code}`})
+    }
+  } catch (err) {
+    if (err.errorType === 'TIMEOUT' && requestTimeout && maxWait) {
+      yield put({type: 'SET_PROPERTY_TIMEOUT_WAIT', name: propertyName})
+
+      // Keep trying to update property until timeout
+      while (true) {
+        try {
+          res = yield call(getProperty, {authorization, propertyName})
+          const {code, result} = res.data
+          if (result[0] === propertyValue) {
+            yield put({
+              type: 'SET_PROPERTY_SUCCEEDED',
+              name: propertyName,
+              value: propertyValue
+            })
+            break
+          }
+        } catch (err) {
+        }
+
+        yield delay(500)
+
+        const now = (new Date()).getTime()
+        if (now - start > (requestTimeout + maxWait)) {
+          yield put({type: 'SET_PROPERTY_TIMEOUT_EXCEEDED', name: propertyName, message: `Failed to set property ${propertyName} due to timeout`})
+          break
+        }
+      }
+    } else {
+      console.error(err)
+      yield put({type: 'SET_PROPERTY_FAILED', message: `Failed to set property ${propertyName} due to unexpected error`})
+    }
+  }
+}
+
+function * performGetProperty (action) {
+  yield put({type: 'GET_PROPERTY_START'})
+  const {propertyName} = action.payload
+  try {
+    const authorization = yield select(getAuthorization)
+    const res = yield call(getProperty, {authorization, propertyName})
+    const {code, result} = res.data
+    if (code === 0) {
+      yield put({
+        type: 'GET_PROPERTY_SUCCEEDED',
+        name: propertyName,
+        value: result[0]
+      })
+    } else {
+      yield put({type: 'GET_PROPERTY_FAILED', message: `Failed to get ${propertyName} code: ${code}`})
+    }
+  } catch (err) {
+    console.error(err)
+    yield put({type: 'GET_PROPERTY_FAILED', message: `Failed to get ${propertyName} due to unexpected error`})
+  }
+}
+
+function * performTriggerEvent (action) {
+  yield put({type: 'TRIGGER_EVENT_START'})
+  const {propertyName, eventType} = action.payload
+  try {
+    const authorization = yield select(getAuthorization)
+    const res = yield call(triggerEvent, {authorization, propertyName, eventType})
+    const {code} = res
+    if (code === 0) {
+      yield put({
+        type: 'TRIGGER_EVENT_SUCCEEDED',
+        name: propertyName,
+        event: eventType
+      })
+    } else {
+      yield put({type: 'TRIGGER_EVENT_FAILED', message: `Failed to trigger event ${propertyName} code: ${code}`})
+    }
+  } catch (err) {
+    console.error(err)
+    yield put({type: 'TRIGGER_EVENT_FAILED', message: `Failed to trigger event ${propertyName} due to unexpected error`})
+  }
+}
 
 function * fetchNick (action) {
   let nick = localStorage.getItem('cb-chat-nick')
@@ -43,7 +177,7 @@ function * fetchTextDirection (action) {
   let textDirection = localStorage.getItem('cb-chat-text-direction')
   if (!textDirection || textDirection === 'undefined') {
     const res = yield call(getDefaultTextDirection)
-    textDirection = res.result
+    textDirection = res.data.result
     localStorage.setItem('cb-chat-text-direction', textDirection)
   }
 
@@ -65,7 +199,7 @@ function * sendMessage (action) {
   const { message } = action
 
   try {
-    const res = yield call(postMessage, message)
+    const res = yield call(postMessage, {message})
 
     if (res.result && res.result.id) {
       yield put({
@@ -91,10 +225,10 @@ function * fetchNewMessages (action) {
   try {
     yield put({type: 'MESSAGES_FETCH_START'})
     const maxMessageId = yield select(getMaxMessageId)
-    const res = yield call(getMessages, maxMessageId)
+    const res = yield call(getMessages, {max_id: maxMessageId})
     yield put({
       type: 'MESSAGES_FETCH_SUCCEEDED',
-      messages: res ? res.result : [],
+      messages: res ? res.data.result : [],
       checkMentions: true
     })
   } catch (e) {
@@ -109,7 +243,7 @@ function * fetchMessages (action) {
     const res = yield call(getMessages)
     yield put({
       type: 'MESSAGES_FETCH_SUCCEEDED',
-      messages: res.result
+      messages: res.data.result
     })
   } catch (e) {
     console.error(e)
@@ -126,11 +260,11 @@ function * fetchContent (action) {
     if (needsConfig) {
       try {
         const configPath = yield select(getConfigPath)
-        const config = yield call(getConfig, configPath)
+        const config = yield call(getConfig, {configPath})
 
         yield put({
           type: 'CONFIG_FETCH_SUCCEEDED',
-          config: config
+          config: config.data
         })
       } catch (e) {
         console.error(e.message)
@@ -139,10 +273,10 @@ function * fetchContent (action) {
       }
     }
     const {contentPath} = action.payload
-    const content = yield call(getContent, contentPath)
+    const content = yield call(getContent, {contentPath})
     yield put({
       type: 'CONTENT_FETCH_SUCCEEDED',
-      content: content,
+      content: content.data,
       contentPath: contentPath
     })
 
@@ -150,10 +284,10 @@ function * fetchContent (action) {
     if (popularFiles === null && (contentPath === '' || contentPath === '/')) {
       const config = yield select(getConfigFromStore)
       try {
-        const stats = yield call(getStats, config.Client.stats_file)
+        const stats = yield call(getStats, {statsPath: `${process.env.PUBLIC_URL}/${config.Client.stats_file}`})
         yield put({
           type: 'STATS_FETCH_SUCCEEDED',
-          stats: stats
+          stats: stats.data
         })
       } catch (e) {
         console.error(e.message)
@@ -166,10 +300,6 @@ function * fetchContent (action) {
   }
 }
 
-/*
-  Starts fetchUser on each dispatched `USER_FETCH_REQUESTED` action.
-  Allows concurrent fetches of user.
-*/
 function * mySaga () {
   yield takeLatest('CONTENT_FETCH_REQUESTED', fetchContent)
   yield takeLatest('MESSAGES_FETCH_REQUESTED', fetchMessages)
@@ -179,17 +309,10 @@ function * mySaga () {
   yield takeLatest('SAVE_NICK_REQUESTED', saveNick)
   yield takeLatest('FETCH_TEXT_DIRECTION_REQUESTED', fetchTextDirection)
   yield takeLatest('SAVE_TEXT_DIRECTION_REQUESTED', saveTextDirection)
+  yield takeEvery('GET_PROPERTY_REQUESTED', performGetProperty)
+  yield takeEvery('SET_PROPERTY_REQUESTED', performSetProperty)
+  yield takeEvery('TRIGGER_EVENT_REQUESTED', performTriggerEvent)
+  yield takeEvery('AUTHENTICATE_REQUESTED', performAuthenticate)
 }
-
-/*
-  Alternatively you may use takeLatest.
-
-  Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
-  dispatched while a fetch is already pending, that pending fetch is cancelled
-  and only the latest one will be run.
-*/
-// function* mySaga() {
-//   yield takeLatest("USER_FETCH_REQUESTED", fetchUser);
-// }
 
 export default mySaga

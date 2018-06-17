@@ -1,6 +1,7 @@
 import './Footer.css'
 
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Footer extends Component {
   onSettingsClick = (evt) => {
@@ -12,9 +13,9 @@ class Footer extends Component {
       <div
         className='footer breadcrumb'>
         <div className='spacer' />
-        <div className='settings-button' onClick={this.onSettingsClick}>
+        <Link className='settings-button' to='/admin/'>
           <i className={`fa fa-cog fa-lg`} aria-hidden='true'></i>
-        </div>
+        </Link>
       </div>
     )
   }

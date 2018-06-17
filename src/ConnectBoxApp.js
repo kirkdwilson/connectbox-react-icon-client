@@ -5,7 +5,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import queryString from 'query-string'
-import { withRouter } from 'react-router'
+import { Redirect, Route, Switch, withRouter } from 'react-router'
 
 import {
   fetchNick,
@@ -22,6 +22,7 @@ import PopularFileList from './components/PopularFileList'
 import RootFolderList from './components/RootFolderList'
 import FolderList from './components/FolderList'
 import Footer from './components/Footer'
+import AdminPanel from './components/admin/dashboard'
 
 function mapStateToProps (state) {
   const {
@@ -144,7 +145,9 @@ export class ConnectBoxApp extends Component {
     }
 
     refreshMessages = () => {
-      this.props.getNewMessages()
+      if (!this.props.location.pathname.startsWith('/admin/')) {
+        this.props.getNewMessages()
+      }
     }
 
     reload (e) {
@@ -281,11 +284,17 @@ export class ConnectBoxApp extends Component {
   render () {
     const { chatPanelShowing } = this.props
 
-    if (chatPanelShowing) {
-      return this.renderChat()
-    } else {
-      return this.renderContent()
-    }
+    return (
+      <Switch>
+        <Route strict path='/admin/' component={AdminPanel} />
+
+        <Route exact path='/admin' >
+          <Redirect to="/admin/" />
+        </Route>
+
+        <Route render={props => (chatPanelShowing ? this.renderChat() : this.renderContent())} />
+      </Switch>
+    )
   }
 }
 

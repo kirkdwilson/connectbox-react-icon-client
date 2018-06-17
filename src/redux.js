@@ -1,3 +1,39 @@
+export function authenticate (password) {
+  return { type: 'AUTHENTICATE_REQUESTED', payload: { password } }
+}
+
+export function clearPasswordUpdated () {
+  return { type: 'CLEAR_PASSWORD_UPDATED' }
+}
+
+export function checkAuthenticated () {
+  const authorization = localStorage.getItem('admin-authorization')
+
+  if (authorization) {
+    const parts = authorization.split(' ')
+    if (parts.length === 2) {
+      const decoded = atob(parts[1])
+      const creds = decoded.split(':')
+      if (creds.length === 2) {
+        return { type: 'AUTHENTICATE_REQUESTED', payload: { password: creds[1] } }
+      }
+    }
+  }
+  return { type: 'AUTHENTICATE_REQUESTED', payload: { password: '' } }
+}
+
+export function setProperty (propertyName, propertyValue, wrap = true, requestTimeout, maxWait, callback) {
+  return { type: 'SET_PROPERTY_REQUESTED', payload: {propertyName, propertyValue, wrap, requestTimeout, maxWait, callback} }
+}
+
+export function getProperty (propertyName, callback) {
+  return { type: 'GET_PROPERTY_REQUESTED', payload: {propertyName, callback}}
+}
+
+export function triggerEvent (propertyName, eventType, callback) {
+  return { type: 'TRIGGER_EVENT_REQUESTED', payload: {propertyName, eventType, callback}}
+}
+
 export function getContent (contentPath, callback) {
   return { type: 'CONTENT_FETCH_REQUESTED', payload: { contentPath, callback } }
 }
@@ -33,7 +69,7 @@ export function getNewMessages (callback) {
 export function setConfigPath (configPath, callback) {
   let path = configPath
   if (!path) {
-    path = '/config/default.json'
+    path = `${process.env.PUBLIC_URL}/config/default.json`
   }
   return { type: 'SET_CONFIG_PATH', payload: {configPath: path} }
 }
@@ -269,6 +305,79 @@ const handlers = {
 
   'CLEAR_MESSAGE_NOTIFICATIONS': (state, action) => {
     return { ...state, mention: false, newMessages: false }
-  }
+  },
 
+  'GET_PROPERTY_START': (state, action) => {
+    return { ...state, adminLoadError: null }
+  },
+
+  'GET_PROPERTY_FAILED': (state, action) => {
+    return { ...state, adminLoadError: action.message}
+  },
+
+  'GET_PROPERTY_SUCCEEDED': (state, action) => {
+    const {name, value} = action
+    return { ...state, [`prop_${name.replace('-', '_')}`]: name === 'ui-config' ? JSON.parse(value) : value}
+  },
+
+  'SET_PROPERTY_START': (state, action) => {
+    return { ...state, propertyUpdating: true, adminError: null, propertyTimeoutWait: false }
+  },
+
+  'SET_PROPERTY_FAILED': (state, action) => {
+    return { ...state, adminError: action.message, propertyUpdating: false }
+  },
+
+  'SET_PROPERTY_TIMEOUT_WAIT': (state, action) => {
+    return { ...state, propertyTimeoutWait: true }
+  },
+
+  'SET_PROPERTY_TIMEOUT_EXCEEDED': (state, action) => {
+    return { ...state, propertyUpdating: false, adminError: action.message }
+  },
+
+  'SET_PROPERTY_SUCCEEDED': (state, action) => {
+    const {name, value} = action
+    const nameSafe = name.replace('-', '_')
+    const passwordUpdated = nameSafe === 'password'
+    return { ...state,
+      [`prop_${nameSafe}`]: !passwordUpdated ? value : null,
+      latestPropUpdate: nameSafe,
+      propertyUpdating: false,
+      passwordUpdated
+    }
+  },
+
+  'TRIGGER_EVENT_START': (state, action) => {
+    return { ...state, propertyUpdating: true, adminError: null }
+  },
+
+  'TRIGGER_EVENT_FAILED': (state, action) => {
+    return { ...state, adminError: action.message, propertyUpdating: false}
+  },
+
+  'TRIGGER_EVENT_SUCCEEDED': (state, action) => {
+    const {name, event} = action
+    return { ...state, [`evt_${name.replace('-', '_')}`]: event, propertyUpdating: false}
+  },
+
+  'CLEAR_PASSWORD_UPDATED': (state, action) => {
+    return { ...state, passwordUpdated: false, authorization: null }
+  },
+
+  'AUTHENTICATE_START': (state, action) => {
+    return { ...state, authorization: '' }
+  },
+
+  'AUTHENTICATE_SUCCEEDED': (state, action) => {
+    const { authorization, version } = action
+    localStorage.setItem('admin-authorization', authorization)
+    return { ...state, authorization, version }
+  },
+
+  'AUTHENTICATE_FAILED': (state, action) => {
+    const { version } = action
+    localStorage.setItem('admin-authorization', null)
+    return { ...state, authorization: null, version }
+  }
 }
