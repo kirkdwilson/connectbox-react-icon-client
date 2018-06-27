@@ -14,5 +14,6 @@ npm run start
 # Publish
 
 ```
+npm install
 npm run publish
 ```
