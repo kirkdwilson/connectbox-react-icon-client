@@ -10,6 +10,7 @@
     "stats_file": "stats.top10.json",
     "excluded_files": [
         "autorun.inf",
+        ".connectbox",
         ".ds_store",
         "system volume information",
         "thumbs.db"
