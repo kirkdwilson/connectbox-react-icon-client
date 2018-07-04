@@ -232,7 +232,8 @@ const handlers = {
   },
 
   'STATS_FETCH_FAILED': (state, action) => {
-    return { ...state, error: action.message }
+    console.warn('Failed to fetch stats')
+    return { ...state }
   },
 
   'MESSAGES_FETCH_START': (state, action) => {
