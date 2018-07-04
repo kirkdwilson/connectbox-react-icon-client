@@ -148,7 +148,18 @@ function * performTriggerEvent (action) {
     }
   } catch (err) {
     console.error(err)
-    yield put({type: 'TRIGGER_EVENT_FAILED', message: `Failed to trigger event ${propertyName} due to unexpected error`})
+    // On mobile devices, trigger a system event that resets or closes the network
+    // causes a 'Network Error', even though it succeeds
+    // Work around is to treat that error as a success
+    if (err.errorType === 'NETWORK_ERROR') {
+      yield put({
+        type: 'TRIGGER_EVENT_SUCCEEDED',
+        name: propertyName,
+        event: eventType
+      })
+    } else {
+      yield put({type: 'TRIGGER_EVENT_FAILED', message: `Failed to trigger event ${propertyName} due to unexpected error`})
+    }
   }
 }
 

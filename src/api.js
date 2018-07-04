@@ -79,6 +79,8 @@ function post (url, body, authorization, timeout) {
   return axios.post(url, body, config).then(resp => resp.data).catch(e => {
     if (e.message.startsWith('timeout of')) {
       e.errorType = 'TIMEOUT'
+    } else if (e.message === 'Network Error') {
+      e.errorType = 'NETWORK_ERROR'
     }
     throw e
   })
@@ -99,6 +101,8 @@ async function put (url, body, authorization, timeout) {
   } catch (e) {
     if (e.message.startsWith('timeout of')) {
       e.errorType = 'TIMEOUT'
+    } else if (e.message === 'Network Error') {
+      e.errorType = 'NETWORK_ERROR'
     }
     throw e
   }
