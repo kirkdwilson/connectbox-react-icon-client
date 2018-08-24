@@ -12,6 +12,13 @@ import reducer from './redux'
 import mySaga from './sagas'
 import { BrowserRouter } from 'react-router-dom'
 
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith#Polyfill#Polyfill
+if (!String.prototype.startsWith) {
+  String.prototype.startsWith = function (search, pos) { // eslint-disable-line no-extend-native
+    return this.substr(!pos || pos < 0 ? 0 : +pos, search.length) === search
+  }
+}
+
 const devTools =
   (typeof window === 'object' && window.devToolsExtension) ||
   (() => noop => noop)
