@@ -88,6 +88,10 @@ class AdminPanel extends Component {
           {authorization && <span className={`headerText ${selected === 'about' ? 'selected' : ''}`}><Link to='about'>About</Link></span>}
           {authorization && <span className={`headerText ${reportsSelected ? 'selected' : ''}`}><Link to='reports'>Reports</Link></span>}
           {authorization && <span className={`headerText ${configSelected ? 'selected' : ''}`}><Link to='configuration'>Configuration</Link></span>}
+          <div className='spacer' />
+          <Link className='exit-button' to='/'>
+            <i className={`fa fa-times fa-lg`} aria-hidden='true' />
+          </Link>
         </div>
         <div className='dashboardBody'>
           {selected === 'home' &&

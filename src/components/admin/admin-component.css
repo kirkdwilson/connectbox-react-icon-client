@@ -91,6 +91,13 @@
   z-index: 100;
 }
 
+.exit-button {
+    cursor: pointer;
+    color: #337ab7;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
 @media (min-width: 768px) {
   .homeTitle {
     font-weight: bold;
