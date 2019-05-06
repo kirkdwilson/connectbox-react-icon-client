@@ -14,6 +14,7 @@ import System from './system'
 import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 import WaitPanel from './wait-panel'
+import WpaPassphrase from './wpa-passphrase'
 
 import {
   checkAuthenticated
@@ -158,6 +159,7 @@ class AdminPanel extends Component {
               <ul>
                 <li><Link to='wap-ssid'>SSID</Link></li>
                 <li><Link to='wap-channel'>Channel</Link></li>
+                <li><Link to='wap-wpa-passphrase'>WPA Passphrase</Link></li>
               </ul>
             </div>
             )
@@ -175,6 +177,14 @@ class AdminPanel extends Component {
               <div className='page-header'><h1>Wireless Access Point</h1></div>
               <p className='lead'>Configure the channel used by the Wireless Access Point</p>
               <Channel />
+            </div>
+            )
+          }
+          {authorization && selected === 'wap-wpa-passphrase' &&
+            (<div>
+              <div className='page-header'><h1>Wireless Access Point</h1></div>
+              <p className='lead'>Configure a WPA Passphrase used by the Wireless Access Point</p>
+              <WpaPassphrase />
             </div>
             )
           }
