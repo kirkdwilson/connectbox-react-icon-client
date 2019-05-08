@@ -30,7 +30,9 @@ class WpaPassphrase extends Component {
       adminError: null,
       adminLoadError: null,
       timeoutError: null,
-      waiting: false
+      waiting: false,
+      validEncoding: true,
+      validLength: true
     }
   }
 
@@ -66,7 +68,7 @@ class WpaPassphrase extends Component {
 
   handleInputUpdate = (evt) => {
     const passphrase = evt.target.value
-    this.setState({passphrase})
+    this.setState({passphrase, ...this.isValid(passphrase)})
   }
 
   handleUpdate = () => {
@@ -87,9 +89,53 @@ class WpaPassphrase extends Component {
     })
   }
 
+  isValid = passphrase => {
+    // empty passphrase clears it
+    if (passphrase.length === 0) {
+      return {
+        validLength: true,
+        validEncoding: true
+      }
+    }
+
+    // length check
+    if (passphrase.length < 8 || passphrase.length > 63) {
+      return {
+        validLength: false,
+        validEncoding: true
+      }
+    }
+
+    // check characters
+    const invalids = passphrase.split('').filter(char => {
+      const charCode = char.charCodeAt(0)
+      return charCode < 32 || charCode > 126
+    })
+
+    if (invalids.length === 0) {
+      return {
+        validLength: true,
+        validEncoding: true
+      }
+    } else {
+      return {
+        validLength: true,
+        validEncoding: false
+      }
+    }
+  }
+
   render () {
     const { propertyUpdating } = this.props
-    const { adminError, adminLoadError, passphrase, timeoutError, showUpdateDialog } = this.state
+    const {
+      adminError,
+      adminLoadError,
+      passphrase,
+      timeoutError,
+      showUpdateDialog,
+      validEncoding,
+      validLength
+    } = this.state
     return (
       <div className='admin-component'>
         {adminLoadError && 
@@ -124,8 +170,10 @@ class WpaPassphrase extends Component {
             className='btn btn-default'
             placeholder='Enter WPA Passphrase'
             onClick={this.handleUpdate}
-            disabled={propertyUpdating}>Update</button>
+            disabled={propertyUpdating || !validLength || !validEncoding}>Update</button>
         </form>
+        {!validLength && <div className='error'>* Passphrase must be between 8 and 63 characters.</div>}
+        {!validEncoding && <div className='error'>* Passphrase characters must have an encoding in the range of 32 to 126 inclusive.</div>}
       </div>
     )
   }

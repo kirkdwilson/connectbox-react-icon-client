@@ -12,6 +12,12 @@
   border-color: red;
 }
 
+.error {
+  color: red;
+  font-style: italic;
+  font-size: smaller;
+}
+
 .dashboard {
   display: flex;
   flex: 1;
