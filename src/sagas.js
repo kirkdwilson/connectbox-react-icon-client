@@ -186,16 +186,24 @@ function * saveNick (action) {
 
 function * fetchTextDirection (action) {
   let textDirection = localStorage.getItem('cb-chat-text-direction')
-  if (!textDirection || textDirection === 'undefined') {
-    const res = yield call(getDefaultTextDirection)
-    textDirection = res.data.result
-    localStorage.setItem('cb-chat-text-direction', textDirection)
-  }
+  try {
+    if (!textDirection || textDirection === 'undefined') {
+      const res = yield call(getDefaultTextDirection)
+      textDirection = res.data.result
+      localStorage.setItem('cb-chat-text-direction', textDirection)
+    }
 
-  yield put({
-    type: 'FETCH_TEXT_DIRECTION_SUCCEEDED',
-    textDirection
-  })
+    yield put({
+      type: 'FETCH_TEXT_DIRECTION_SUCCEEDED',
+      textDirection
+    })
+  } catch (e) {
+    console.error(e)
+    yield put({
+      type: 'FETCH_TEXT_DIRECTION_SUCCEEDED',
+      textDirection: 'ltr'
+    })
+  }
 }
 
 function * saveTextDirection (action) {
