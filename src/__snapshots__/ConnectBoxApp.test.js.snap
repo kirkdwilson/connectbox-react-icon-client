@@ -2,407 +2,513 @@
 
 exports[`ConnectBoxApp tests renders content fully 1`] = `
 <div
-  className="container-fluid"
+  style={
+    Object {
+      "height": "calc(100%)",
+    }
+  }
 >
   <div
-    className="row"
+    className="content-panel"
   >
-    <ol
-      className="breadcrumb"
+    <div
+      className="navigation-bar"
+    >
+      <ol
+        className="navbar-container breadcrumb"
+        style={
+          Object {
+            "left": "0px",
+            "position": "absolute",
+            "right": "0px",
+            "zIndex": 1000,
+          }
+        }
+      >
+        <li>
+          <a
+            onClick={[Function]}
+            role="button"
+            title="Reload"
+          >
+            <i
+              className="fa fa-refresh"
+            />
+          </a>
+        </li>
+        <li
+          className={null}
+          style={Object {}}
+        >
+          <span>
+            <a
+              href="/"
+              onClick={[Function]}
+            >
+              <i
+                className="fa fa-home fa-lg"
+              />
+            </a>
+          </span>
+        </li>
+      </ol>
+      <div
+        className="chat-button"
+        onClick={[Function]}
+      >
+        <i
+          aria-hidden="true"
+          className="fa fa-comments-o fa-lg chat-icon  "
+          style={
+            Object {
+              "display": "none",
+              "position": "absolute",
+              "right": 10,
+              "top": 0,
+            }
+          }
+        />
+        <i
+          aria-hidden="true"
+          className="fa fa-comments fa-lg chat-icon  "
+          style={
+            Object {
+              "display": "none",
+              "position": "absolute",
+              "right": 10,
+              "top": 0,
+            }
+          }
+        />
+        <i
+          aria-hidden="true"
+          className="fa fa-comments fa-lg chat-icon  "
+          style={
+            Object {
+              "display": "block",
+              "position": "absolute",
+              "right": 10,
+              "top": 0,
+            }
+          }
+        />
+      </div>
+    </div>
+    <div
       style={
         Object {
-          "left": "20px",
-          "position": "fixed",
-          "right": "20px",
-          "zIndex": 1000,
+          "marginTop": "3em",
         }
       }
     >
-      <li>
-        <a
-          onClick={[Function]}
-          role="button"
-          title="Reload"
+      <div
+        className="table-responsive"
+      >
+        <table
+          className="table collapsed"
         >
-          <i
-            className="fa fa-refresh"
-          />
-        </a>
-      </li>
-      <li>
-        <span>
-          <a
-            href="/"
-            onClick={[Function]}
-          >
-            <i
-              className="fa fa-home fa-lg"
-            />
-          </a>
-        </span>
-      </li>
-    </ol>
-  </div>
-  <div
-    className="row"
-    style={
-      Object {
-        "marginTop": "3em",
-      }
-    }
-  >
-    <div
-      className="table-responsive"
-    >
-      <table
-        className="table collapsed"
-      >
-        <tbody>
-          <tr>
-            <td
-              className="centered"
-            >
-              <a
-                href="#/Help"
-                onClick={[Function]}
+          <tbody>
+            <tr>
+              <td
+                className="centered"
               >
-                <div
-                  className="home-icon-container"
+                <a
+                  href="#/Help"
+                  onClick={[Function]}
                 >
-                  <img
-                    alt=""
-                    src="/content/_icon_Help.png"
+                  <div
+                    className="home-icon-container"
+                  >
+                    <img
+                      alt=""
+                      src="/content/_icon_Help.png"
+                    />
+                  </div>
+                  <span>
+                    Help
+                  </span>
+                  <span
+                    className="directory"
                   />
-                </div>
-                <span>
-                  Help
-                </span>
-                <span
-                  className="directory"
-                />
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td
-              className="centered"
-            >
-              <a
-                href="#/Music"
-                onClick={[Function]}
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td
+                className="centered"
               >
-                <i
-                  className="fa fa-folder fa-5x"
-                />
-                <span>
-                  <br />
-                  Music
-                </span>
-                <span
-                  className="directory"
-                />
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td
-              className="centered"
-            >
-              <a
-                href="#/Videos"
-                onClick={[Function]}
-              >
-                <i
-                  className="fa fa-video-camera fa-5x"
-                />
-                <span>
-                  <br />
-                  Videos
-                </span>
-                <span
-                  className="directory"
-                />
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td
-              className="centered"
-            >
-              <a
-                href="#/standard-folder"
-                onClick={[Function]}
-              >
-                <i
-                  className="fa fa-folder fa-5x"
-                />
-                <span>
-                  <br />
-                  standard-folder
-                </span>
-                <span
-                  className="directory"
-                />
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td
-              className="centered"
-            >
-              <a
-                href="#/throughput-test"
-                onClick={[Function]}
-              >
-                <i
-                  className="fa fa-folder fa-5x"
-                />
-                <span>
-                  <br />
-                  throughput-test
-                </span>
-                <span
-                  className="directory"
-                />
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td
-              className="centered"
-            >
-              <a
-                href="#/written"
-                onClick={[Function]}
-              >
-                <i
-                  className="fa fa-book fa-5x"
-                />
-                <span>
-                  <br />
-                  written
-                </span>
-                <span
-                  className="directory"
-                />
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div
-    className="row"
-  >
-    <div
-      className="table-responsive"
-    >
-      <table
-        className="table"
-      >
-        <tbody>
-          <tr>
-            <td>
-              <a
-                href="/content/King James Bible.epub"
-              >
-                <i
-                  className="fa "
-                />
-                <i
-                  className="fa fa-file-text-o"
-                />
-                <span
-                  className=""
+                <a
+                  href="#/Music"
+                  onClick={[Function]}
                 >
+                  <i
+                    className="fa fa-folder fa-5x"
+                  />
+                  <span>
+                    <br />
+                    Music
+                  </span>
+                  <span
+                    className="directory"
+                  />
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td
+                className="centered"
+              >
+                <a
+                  href="#/Videos"
+                  onClick={[Function]}
+                >
+                  <i
+                    className="fa fa-video-camera fa-5x"
+                  />
+                  <span>
+                    <br />
+                    Videos
+                  </span>
+                  <span
+                    className="directory"
+                  />
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td
+                className="centered"
+              >
+                <a
+                  href="#/standard-folder"
+                  onClick={[Function]}
+                >
+                  <i
+                    className="fa fa-folder fa-5x"
+                  />
+                  <span>
+                    <br />
+                    standard-folder
+                  </span>
+                  <span
+                    className="directory"
+                  />
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td
+                className="centered"
+              >
+                <a
+                  href="#/throughput-test"
+                  onClick={[Function]}
+                >
+                  <i
+                    className="fa fa-folder fa-5x"
+                  />
+                  <span>
+                    <br />
+                    throughput-test
+                  </span>
+                  <span
+                    className="directory"
+                  />
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td
+                className="centered"
+              >
+                <a
+                  href="#/written"
+                  onClick={[Function]}
+                >
+                  <i
+                    className="fa fa-book fa-5x"
+                  />
+                  <span>
+                    <br />
+                    written
+                  </span>
+                  <span
+                    className="directory"
+                  />
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div
+        className="table-responsive"
+      >
+        <table
+          className="table"
+        >
+          <tbody>
+            <tr>
+              <td>
+                <a
+                  href="/content/King James Bible.epub"
+                >
+                  <i
+                    className="fa fa-file-text-o"
+                  />
+                  <span
+                    className=""
+                  >
+                    <span>
+                       
+                      King James Bible.epub
+                    </span>
+                  </span>
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <a
+                  href="/content/README.txt"
+                >
+                  <i
+                    className="fa fa-file-text-o"
+                  />
+                  <span
+                    className=""
+                  >
+                    <span>
+                       
+                      README.txt
+                    </span>
+                  </span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div
+        className="table-responsive"
+      >
+        <table
+          className="table"
+        >
+          <tbody>
+            <tr>
+              <td
+                className="popular-content-header"
+              >
+                <i
+                  className="fa fa-line-chart"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td
+                style={
+                  Object {
+                    "borderTop": 0,
+                  }
+                }
+              >
+                <a
+                  href="/content/Music/Vivaldi%20-%20Spring%20from%20Four%20Seasons.mp3"
+                  style={
+                    Object {
+                      "display": "inline-block",
+                    }
+                  }
+                >
+                  <i
+                    className="fa fa-file-sound-o"
+                  />
                   <span>
                      
-                    King James Bible.epub
+                    Vivaldi - Spring from Four Seasons.mp3
+                  </span>
+                </a>
+                <span
+                  style={
+                    Object {
+                      "display": "inline-block",
+                      "paddingLeft": "4px",
+                    }
+                  }
+                >
+                   
+                  <span>
+                    <i
+                      className="fa fa-flash"
+                      style={
+                        Object {
+                          "color": "#337ab7",
+                          "paddingRight": "2px",
+                        }
+                      }
+                    />
+                  </span>
+                  <span>
+                    <i
+                      className="fa fa-flash"
+                      style={
+                        Object {
+                          "color": "#337ab7",
+                          "paddingRight": "2px",
+                        }
+                      }
+                    />
+                  </span>
+                  <span>
+                    <i
+                      className="fa fa-flash"
+                      style={
+                        Object {
+                          "color": "#337ab7",
+                          "paddingRight": "2px",
+                        }
+                      }
+                    />
+                  </span>
+                  <span>
+                    <i
+                      className="fa fa-flash"
+                      style={
+                        Object {
+                          "color": "#337ab7",
+                          "paddingRight": "2px",
+                        }
+                      }
+                    />
+                  </span>
+                  <span>
+                    <i
+                      className="fa fa-flash"
+                      style={
+                        Object {
+                          "color": "#337ab7",
+                          "paddingRight": "2px",
+                        }
+                      }
+                    />
                   </span>
                 </span>
-              </a>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <a
-                href="/content/README.txt"
+              </td>
+            </tr>
+            <tr>
+              <td
+                style={Object {}}
               >
-                <i
-                  className="fa "
-                />
-                <i
-                  className="fa fa-file-text-o"
-                />
-                <span
-                  className=""
+                <a
+                  href="/content/README.txt"
+                  style={
+                    Object {
+                      "display": "inline-block",
+                    }
+                  }
                 >
+                  <i
+                    className="fa fa-file-text-o"
+                  />
                   <span>
                      
                     README.txt
                   </span>
+                </a>
+                <span
+                  style={
+                    Object {
+                      "display": "inline-block",
+                      "paddingLeft": "4px",
+                    }
+                  }
+                >
+                   
+                  <span>
+                    <i
+                      className="fa fa-flash"
+                      style={
+                        Object {
+                          "color": "#337ab7",
+                          "paddingRight": "2px",
+                        }
+                      }
+                    />
+                  </span>
                 </span>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+            </tr>
+            <tr>
+              <td
+                style={Object {}}
+              >
+                <a
+                  href="/content/throughput-test/10MB.bin"
+                  style={
+                    Object {
+                      "display": "inline-block",
+                    }
+                  }
+                >
+                  <i
+                    className="fa fa-file-text-o"
+                  />
+                  <span>
+                     
+                    10MB.bin
+                  </span>
+                </a>
+                <span
+                  style={
+                    Object {
+                      "display": "inline-block",
+                      "paddingLeft": "4px",
+                    }
+                  }
+                >
+                   
+                  <span>
+                    <i
+                      className="fa fa-flash"
+                      style={
+                        Object {
+                          "color": "#337ab7",
+                          "paddingRight": "2px",
+                        }
+                      }
+                    />
+                  </span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
-  <div
-    className="row"
-  >
     <div
-      className="table-responsive"
+      className="spacer"
+    />
+    <div
+      className="footer breadcrumb"
     >
-      <table
-        className="table"
+      <div
+        className="spacer"
+      />
+      <a
+        className="settings-button"
+        href="/admin/"
+        onClick={[Function]}
       >
-        <tbody>
-          <tr>
-            <td
-              className="popular-content-header"
-            >
-              <i
-                className="fa fa-line-chart"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td
-              style={
-                Object {
-                  "borderTop": 0,
-                }
-              }
-            >
-              <a
-                href="/content/Music/Vivaldi%20-%20Spring%20from%20Four%20Seasons.mp3"
-                style={
-                  Object {
-                    "display": "inline-block",
-                  }
-                }
-              >
-                <i
-                  className="fa fa-file-sound-o"
-                />
-                <span>
-                   
-                  Vivaldi - Spring from Four Seasons.mp3
-                </span>
-              </a>
-              <span
-                style={
-                  Object {
-                    "display": "inline-block",
-                  }
-                }
-              >
-                 
-                <span>
-                  <i
-                    className="fa fa-stop"
-                  />
-                </span>
-                <span>
-                  <i
-                    className="fa fa-stop"
-                  />
-                </span>
-                <span>
-                  <i
-                    className="fa fa-stop"
-                  />
-                </span>
-                <span>
-                  <i
-                    className="fa fa-stop"
-                  />
-                </span>
-                <span>
-                  <i
-                    className="fa fa-stop"
-                  />
-                </span>
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td
-              style={Object {}}
-            >
-              <a
-                href="/content/README.txt"
-                style={
-                  Object {
-                    "display": "inline-block",
-                  }
-                }
-              >
-                <i
-                  className="fa fa-file-text-o"
-                />
-                <span>
-                   
-                  README.txt
-                </span>
-              </a>
-              <span
-                style={
-                  Object {
-                    "display": "inline-block",
-                  }
-                }
-              >
-                 
-                <span>
-                  <i
-                    className="fa fa-stop"
-                  />
-                </span>
-              </span>
-            </td>
-          </tr>
-          <tr>
-            <td
-              style={Object {}}
-            >
-              <a
-                href="/content/throughput-test/10MB.bin"
-                style={
-                  Object {
-                    "display": "inline-block",
-                  }
-                }
-              >
-                <i
-                  className="fa fa-file-text-o"
-                />
-                <span>
-                   
-                  10MB.bin
-                </span>
-              </a>
-              <span
-                style={
-                  Object {
-                    "display": "inline-block",
-                  }
-                }
-              >
-                 
-                <span>
-                  <i
-                    className="fa fa-stop"
-                  />
-                </span>
-              </span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+        <i
+          aria-hidden="true"
+          className="fa fa-cog fa-lg"
+        />
+      </a>
     </div>
   </div>
 </div>

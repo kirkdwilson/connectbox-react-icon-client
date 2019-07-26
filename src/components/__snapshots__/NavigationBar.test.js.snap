@@ -2,12 +2,12 @@
 
 exports[`Render NavigationBar Root - Loading 1`] = `
 <ol
-  className="breadcrumb"
+  className="navbar-container breadcrumb"
   style={
     Object {
-      "left": "20px",
-      "position": "fixed",
-      "right": "20px",
+      "left": "0px",
+      "position": "absolute",
+      "right": "0px",
       "zIndex": 1000,
     }
   }
@@ -23,7 +23,10 @@ exports[`Render NavigationBar Root - Loading 1`] = `
       />
     </a>
   </li>
-  <li>
+  <li
+    className={null}
+    style={Object {}}
+  >
     <span>
       <a
         href="/"
@@ -35,7 +38,14 @@ exports[`Render NavigationBar Root - Loading 1`] = `
       </a>
     </span>
   </li>
-  <li>
+  <li
+    className="navbar-element"
+    style={
+      Object {
+        "flex-basis": "100%",
+      }
+    }
+  >
     <span>
       content
     </span>
@@ -45,12 +55,12 @@ exports[`Render NavigationBar Root - Loading 1`] = `
 
 exports[`Render NavigationBar Root 1`] = `
 <ol
-  className="breadcrumb"
+  className="navbar-container breadcrumb"
   style={
     Object {
-      "left": "20px",
-      "position": "fixed",
-      "right": "20px",
+      "left": "0px",
+      "position": "absolute",
+      "right": "0px",
       "zIndex": 1000,
     }
   }
@@ -66,7 +76,10 @@ exports[`Render NavigationBar Root 1`] = `
       />
     </a>
   </li>
-  <li>
+  <li
+    className={null}
+    style={Object {}}
+  >
     <span>
       <a
         href="/"
@@ -78,7 +91,14 @@ exports[`Render NavigationBar Root 1`] = `
       </a>
     </span>
   </li>
-  <li>
+  <li
+    className="navbar-element"
+    style={
+      Object {
+        "flex-basis": "100%",
+      }
+    }
+  >
     <span>
       content
     </span>
@@ -88,12 +108,12 @@ exports[`Render NavigationBar Root 1`] = `
 
 exports[`Render NavigationBar Subfolder 1`] = `
 <ol
-  className="breadcrumb"
+  className="navbar-container breadcrumb"
   style={
     Object {
-      "left": "20px",
-      "position": "fixed",
-      "right": "20px",
+      "left": "0px",
+      "position": "absolute",
+      "right": "0px",
       "zIndex": 1000,
     }
   }
@@ -109,7 +129,10 @@ exports[`Render NavigationBar Subfolder 1`] = `
       />
     </a>
   </li>
-  <li>
+  <li
+    className={null}
+    style={Object {}}
+  >
     <span>
       <a
         href="/"
@@ -121,7 +144,10 @@ exports[`Render NavigationBar Subfolder 1`] = `
       </a>
     </span>
   </li>
-  <li>
+  <li
+    className="navbar-element"
+    style={Object {}}
+  >
     <a
       href="/#/content"
       onClick={[Function]}
@@ -129,7 +155,10 @@ exports[`Render NavigationBar Subfolder 1`] = `
       content
     </a>
   </li>
-  <li>
+  <li
+    className="navbar-element"
+    style={Object {}}
+  >
     <a
       href="/#/content/foo"
       onClick={[Function]}
@@ -137,7 +166,14 @@ exports[`Render NavigationBar Subfolder 1`] = `
       foo
     </a>
   </li>
-  <li>
+  <li
+    className="navbar-element"
+    style={
+      Object {
+        "flex-basis": "100%",
+      }
+    }
+  >
     <span>
       bar
     </span>

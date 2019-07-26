@@ -195,7 +195,7 @@ class Reports extends Component {
           showPageSizeOptions={report !== 'stats.top10'}
           showPageJump
         />
-        <div className='footer'>
+        <div className='reports-footer'>
           <span>Download <a href={`/${report}.json`}>report</a></span>
         </div>
       </div>
