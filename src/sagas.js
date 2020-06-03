@@ -270,6 +270,23 @@ function * fetchMessages (action) {
   }
 }
 
+function * refreshConfig (action) {
+  console.log('refreshConfig - here')
+  try {
+    const configPath = yield select(getConfigPath)
+    const config = yield call(getConfig, {configPath})
+
+    yield put({
+      type: 'CONFIG_FETCH_SUCCEEDED',
+      config: config.data
+    })
+  } catch (e) {
+    console.error(e.message)
+    yield put({type: 'CONFIG_FETCH_FAILED', message: 'Unable to load configuration'})
+    return
+  }
+}
+
 // worker Saga: will be fired on USER_FETCH_REQUESTED actions
 function * fetchContent (action) {
   try {
@@ -320,6 +337,7 @@ function * fetchContent (action) {
 }
 
 function * mySaga () {
+  yield takeLatest('REFRESH_CONFIG', refreshConfig)
   yield takeLatest('CONTENT_FETCH_REQUESTED', fetchContent)
   yield takeLatest('MESSAGES_FETCH_REQUESTED', fetchMessages)
   yield takeLatest('NEW_MESSAGES_FETCH_REQUESTED', fetchNewMessages)
